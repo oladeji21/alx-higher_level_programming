@@ -1,11 +1,12 @@
 #!/usr/bin/python3
-"""Module that takes in a url sends a request and displays 
-its X-Request-Id variable found in the response header"""
+"""Displays the X-Request-Id header variable of a request to a given URL"""
+import sys
+import urllib.request
+
 
 if __name__ == "__main__":
-    from urllib.request import urlopen
-    from sys import argv
-    url = argv[1]
-    with urlopen(url) as response:
-        output = response.info().__getitem__('X-Request-Id')
-        print(output)
+    url = sys.argv[1]
+
+    req = urllib.request.Request(url)
+    with urllib.request.urlopen(req) as response:
+        print(dict(response.headers).get("X-Request-Id"))
