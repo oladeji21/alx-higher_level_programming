@@ -1,13 +1,10 @@
 #!/usr/bin/python3
-"""
-Module that uses request package to fetch url's
-"""
+"""Script that fetches https://intranet.hbtn.io/status"""
 import requests
 
-if __name__ == "__main__":
 
-    url = 'https://alx-intranet.hbtn.io/status'
-    res = requests.get(url)
-    print('Body response:')
-    print('\t- type: {}'.format(type(res)))
-    print('\t- content: {}'.format(res.text))
+if __name__ == "__main__":
+    req = requests.get("https://alx-intranet.hbtn.io/status")
+    print("Body response:")
+    print("\t- type: {}".format(type(req.text)))
+    print("\t- content: {}".format(req.text))
