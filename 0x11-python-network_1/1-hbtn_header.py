@@ -1,11 +1,16 @@
 #!/usr/bin/python3
-"""Module that takes in a url sends a request and displays 
-its X-Request-Id variable found in the response header"""
+"""Error code #0"""
+import sys
+import urllib.error
+import urllib.request
+
 
 if __name__ == "__main__":
-    from urllib.request import urlopen
-    from sys import argv
-    url = argv[1]
-    with urlopen(url) as response:
-        output = response.info().__getitem__('X-Request-Id')
-        print(output)
+    url = sys.argv[1]
+
+    request = urllib.request.Request(url)
+    try:
+        with urllib.request.urlopen(request) as response:
+            print(response.read().decode("ascii"))
+    except urllib.error.HTTPError as e:
+        print("Error code: {}".format(e.code))
