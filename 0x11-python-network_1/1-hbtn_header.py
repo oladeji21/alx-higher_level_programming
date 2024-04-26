@@ -1,16 +1,12 @@
 #!/usr/bin/python3
-"""Error code #0"""
+"""Displays the X-Request-Id header variable of a request to a given URL"""
 import sys
-import urllib.error
 import urllib.request
 
 
 if __name__ == "__main__":
     url = sys.argv[1]
 
-    request = urllib.request.Request(url)
-    try:
-        with urllib.request.urlopen(request) as response:
-            print(response.read().decode("ascii"))
-    except urllib.error.HTTPError as e:
-        print("Error code: {}".format(e.code))
+    req = urllib.request.Request(url)
+    with urllib.request.urlopen(req) as response:
+        print(dict(response.headers).get("X-Request-Id"))
